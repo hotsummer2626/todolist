@@ -29,6 +29,12 @@
       }
       &.listItem {
         background: #f3e3d4;
+        &.active {
+          background: #c7dfcf;
+        }
+        .icon {
+          cursor: pointer;
+        }
       }
     }
   }

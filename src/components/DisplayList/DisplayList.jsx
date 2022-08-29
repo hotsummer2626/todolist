@@ -7,11 +7,14 @@ import {
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 
-const DisplayList = ({ listData }) => {
+const DisplayList = ({ listData, changeListItemStatus, deleteListItem }) => {
+  const doneItemAmount = listData.filter((list) => list.isDone === true).length;
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Todo's</h2>
-      <div className={styles.overview}>2 todos pending. 1 completed</div>
+      <div className={styles.overview}>{`${
+        listData.length - doneItemAmount
+      } todos pending. ${doneItemAmount} completed`}</div>
       <ul className={styles.listWrapper}>
         <li className={styles.listHeader}>
           <span>#</span>
@@ -19,17 +22,34 @@ const DisplayList = ({ listData }) => {
           <span>Action</span>
         </li>
         {listData.map((item, index) => (
-          <li key={item.id} className={styles.listItem}>
+          <li
+            key={item.id}
+            className={`${styles.listItem} ${item.isDone ? "" : styles.active}`}
+          >
             <span>{index + 1}</span>
             <span>{item.detail}</span>
             <span>
               {item.isDone ? (
-                <FontAwesomeIcon icon={faCheck} />
+                <FontAwesomeIcon
+                  icon={faCheck}
+                  className={styles.icon}
+                  onClick={changeListItemStatus(item, index)}
+                />
               ) : (
-                <FontAwesomeIcon icon={faXmark} />
+                <>
+                  <FontAwesomeIcon
+                    icon={faXmark}
+                    className={styles.icon}
+                    onClick={changeListItemStatus(item, index)}
+                  />
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <FontAwesomeIcon
+                    icon={faTrashCan}
+                    className={styles.icon}
+                    onClick={deleteListItem(index)}
+                  />
+                </>
               )}
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <FontAwesomeIcon icon={faTrashCan} />
             </span>
           </li>
         ))}

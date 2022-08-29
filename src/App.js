@@ -23,11 +23,33 @@ const listData = [
 
 const App = () => {
   const [list, setList] = useState(listData);
+
+  const addNewListItem = (detail) => {
+    if (detail === "") return;
+    if (list.filter((list) => list.detail === detail).length != 0) return;
+    const newListItem = { id: list.length + 1, detail: detail, isDone: false };
+    setList([...list, newListItem]);
+  };
+
+  const changeListItemStatus = (itemObj, index) => () => {
+    list.splice(index, 1, { ...itemObj, isDone: !itemObj.isDone });
+    setList([...list]);
+  };
+
+  const deleteListItem = (index) => () => {
+    list.splice(index, 1);
+    setList([...list]);
+  };
+
   return (
     <div className="background">
       <div>
-        <AddInput />
-        <DisplayList listData={list} />
+        <AddInput addNewListItem={addNewListItem} />
+        <DisplayList
+          listData={list}
+          changeListItemStatus={changeListItemStatus}
+          deleteListItem={deleteListItem}
+        />
       </div>
     </div>
   );
