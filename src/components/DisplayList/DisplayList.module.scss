@@ -1,0 +1,35 @@
+.container {
+  width: 500px;
+  padding: 15px;
+  border-radius: 10px;
+  background: #f4f5f8;
+  .title {
+    font-style: italic;
+  }
+  .overview {
+    color: #a6a6a6;
+  }
+  .listWrapper {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 20px;
+    overflow: hidden;
+    li {
+      height: 35px;
+      line-height: 35px;
+      display: grid;
+      grid-template-columns: 1fr 5fr 2fr;
+      span {
+        &:first-child {
+          text-align: center;
+        }
+      }
+      &.listHeader {
+        background: #fb7d19;
+      }
+      &.listItem {
+        background: #f3e3d4;
+      }
+    }
+  }
+}
