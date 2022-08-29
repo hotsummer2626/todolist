@@ -33,14 +33,14 @@ const DisplayList = ({ listData, changeListItemStatus, deleteListItem }) => {
                 <FontAwesomeIcon
                   icon={faCheck}
                   className={styles.icon}
-                  onClick={changeListItemStatus(item, index)}
+                  onClick={changeListItemStatus(item.id)}
                 />
               ) : (
                 <>
                   <FontAwesomeIcon
                     icon={faXmark}
                     className={styles.icon}
-                    onClick={changeListItemStatus(item, index)}
+                    onClick={changeListItemStatus(item.id)}
                   />
                   &nbsp;&nbsp;&nbsp;&nbsp;
                   <FontAwesomeIcon

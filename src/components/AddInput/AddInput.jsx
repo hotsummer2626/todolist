@@ -13,13 +13,23 @@ const AddInput = ({ addNewListItem }) => {
       <div className={styles.title}>todo list</div>
       <div className={styles["input-button"]}>
         <input
+          value={inputDetail}
           type="text"
           placeholder="Enter Todo"
           onChange={handleInputChange}
+          onKeyUp={(event) => {
+            if (event.key === "Enter") {
+              addNewListItem(inputDetail);
+              setInputDetail("");
+            }
+          }}
         />
         <div
           className={styles.button}
-          onClick={() => addNewListItem(inputDetail)}
+          onClick={() => {
+            addNewListItem(inputDetail);
+            setInputDetail("");
+          }}
         >
           <FontAwesomeIcon icon={faPlus} />
         </div>

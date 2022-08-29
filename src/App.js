@@ -26,13 +26,14 @@ const App = () => {
 
   const addNewListItem = (detail) => {
     if (detail === "") return;
-    if (list.filter((list) => list.detail === detail).length != 0) return;
+    if (list.filter((list) => list.detail === detail).length !== 0) return;
     const newListItem = { id: list.length + 1, detail: detail, isDone: false };
     setList([...list, newListItem]);
   };
 
-  const changeListItemStatus = (itemObj, index) => () => {
-    list.splice(index, 1, { ...itemObj, isDone: !itemObj.isDone });
+  const changeListItemStatus = (id) => () => {
+    const listItem = list.filter((list) => list.id === id)[0];
+    listItem.isDone = !listItem.isDone;
     setList([...list]);
   };
 
